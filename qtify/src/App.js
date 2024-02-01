@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./components/Button/Button";
 import Search from "./components/Search/Search";
+import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
+
 function App() {
+  const [searchData, setSearchData] = useState(); // Fixed the destructuring here
   return (
-    <div>
-      <Button>Give Feedback</Button>
-      <Search placeholder={""}></Search>
-    </div>
+    <>
+      <Navbar searchData={searchData} />
+      <Hero searchData={searchData} />
+    </>
   );
 }
 
