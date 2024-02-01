@@ -1,5 +1,5 @@
 .wrapper {
-    width: 160px;;
+    width: 160px;
 }
 
 .card {
@@ -24,7 +24,7 @@
 
 .pill {
     font-size: 12px;
-    background-color: avr(--color-black);
+    background-color: var(--color-black);
     width: max-content;
     padding: 6px;
     border-radius: 10px;
@@ -36,10 +36,10 @@
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     display: -webkit-box;
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical; /*check*/
 }
 
 .chip {
-    background-color: var(--color-black);
-    color: white;
-}
+    color: white !important;
+    background-color: var(--color-black) !important; 
+    }
