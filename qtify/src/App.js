@@ -1,16 +1,37 @@
-import React, { useState } from "react";
-import Button from "./components/Button/Button";
-import Search from "./components/Search/Search";
-import Navbar from "./components/Navbar/Navbar";
-import Hero from "./components/Hero/Hero";
+
+import { Outlet } from 'react-router-dom';
+import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import { fetchNewAlbums, fetchSongs, fetchTopAlbums } from './api/api';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [searchData, setSearchData] = useState(); // Fixed the destructuring here
+  const [searchData, useSearchData] = useState();
+  const [data, setData] = useState({});
+
+  const generateData = (key, source) => {
+    source().then((data) => {
+      setData((prevData) => {
+        return {...prevData, [key]: data};
+      })
+    })
+  }
+  
+  useEffect(() => {
+    generateData("topAlbums", fetchTopAlbums);
+    generateData("newAlbums", fetchNewAlbums);
+    generateData("songs", fetchSongs);
+  }, [])
+
+const {topAlbums = [], newAlbums = [], songs = []} = data;
+
   return (
-    <>
-      <Navbar searchData={searchData} />
-      <Hero searchData={searchData} />
-    </>
+   <>
+       <div>
+        <Navbar />
+        <Outlet context={{ data: {topAlbums, newAlbums, songs}}} />
+       </div>
+   </>
   );
 }
 
